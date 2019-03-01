@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		int[] array1 = {1,2,3,2,2,2,5,4,2};
+		int num = MoreThanHalf(array1);
+		System.out.println(num);
+		
+	}
+
+	public static int MoreThanHalf(int[] array) {
+		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i=0;i<array.length;i++) {
+			list.add(array[i]);
+		}
+		map.put(0,0);
+		while(!list.isEmpty()) {
+			int count= 1;
+			int temp = list.get(0);
+			list.remove(0);
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i)==temp) {
+					count++;
+					list.remove(i);
+					i--;
+				}
+			}
+			if(count>map.get(map.firstKey())) {
+				map.clear();
+				map.put(temp, count);
+			}
+		}
+		if(map.get(map.firstKey())>array.length/2) {
+			return  map.firstKey();
+		}else {
+			return 0;
+		}
+		
+	}
+}
