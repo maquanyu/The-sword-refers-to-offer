@@ -1,0 +1,23 @@
+public class Solution {
+
+	public static void main(String[] args) {
+		int n = 20;
+		int result = NumberOf1Between1AndN_Solution(n);
+		System.out.println(result);
+	}
+
+	public static int NumberOf1Between1AndN_Solution(int n) {
+		int count = 0;
+		for(int i=1;i<=n;i++) {
+			String str = Integer.toString(i);
+			char[] newChar = str.toCharArray();
+			for(int j=0;j<newChar.length;j++) {
+				if(newChar[j]=='1') {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+}
