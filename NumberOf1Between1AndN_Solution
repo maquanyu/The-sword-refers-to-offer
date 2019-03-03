@@ -7,6 +7,8 @@ public class Solution {
 	}
 
 	public static int NumberOf1Between1AndN_Solution(int n) {
+		
+		#方法一：
 		int count = 0;
 		for(int i=1;i<=n;i++) {
 			String str = Integer.toString(i);
@@ -18,6 +20,19 @@ public class Solution {
 			}
 		}
 		return count;
+		#方法二：
+		int count = 0;
+        	StringBuilder str = new StringBuilder();
+		for(int i=0;i<n;i++) {
+			str.append(i+1);
+		}
+		for(int i=0;i<str.length();i++) {
+			if(str.charAt(i)=='1') {
+				count++;
+			}
+		}
+		return count;
 	}
 
 }
+
