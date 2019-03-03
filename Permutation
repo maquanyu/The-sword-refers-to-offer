@@ -1,0 +1,64 @@
+import java.util.ArrayList;
+
+public class Solution {
+
+	public static void main(String[] args) {
+
+		String str="aa";
+		ArrayList<String> list = new ArrayList<String>();
+		list=Permutation(str);
+		System.out.println(list.size());
+		for(int i=0;i<list.size();i++) {
+			System.out.print(list.get(i)+" ");
+		}
+	}
+
+	public static ArrayList<String> Permutation(String str) {
+		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<Character> temp=new ArrayList<Character>();
+		if(str.length()==0) {
+			return result;
+		}
+		if(str.length()==1) {
+			result.add(str);
+			return result;
+		}
+		if(str.length()==2) {
+			result.add(str);
+			str=str.concat(str.substring(0, 1));
+			str=str.substring(1);
+			result.add(str);
+		}else{
+			if(result.isEmpty()) {
+				temp.add(str.charAt(0));
+				str=str.substring(1);
+				result=Permutation(str);
+			}
+		}
+		for(int i=0;i<temp.size();i++) {
+			int cycle=result.size();
+			for(int j=0;j<cycle;j++) {
+				StringBuilder tmpStr=new StringBuilder(result.get(0));
+				for(int k=0;k<tmpStr.length()+1;k++) {
+					tmpStr.insert(k, temp.get(i));
+					result.add(tmpStr.toString());
+					tmpStr.deleteCharAt(k);
+				}
+				result.remove(0);
+			}
+		}
+		for(int i=0;i<result.size()-1;i++) {
+			for(int j=i+1;j<result.size();j++) {
+				if(result.get(i).compareTo(result.get(j))==0) {
+					result.remove(j);
+				}else if(result.get(i).compareTo(result.get(j))>0) {
+					String tm=result.get(j);
+					result.add(i, tm);
+					result.remove(j+1);
+				}
+			}
+		}
+		return result;
+	}
+
+}
