@@ -1,0 +1,89 @@
+#方法一：
+
+import java.util.Scanner;
+
+public class GetUglyNumber_Solution {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		int N=scan.nextInt();
+		int num=Statistic(N);
+		System.out.println(num);
+	}
+
+	public static int Statistic(int index) {
+		int num=1;
+		int count=1;
+		int result=0;
+		while(count<index) {
+			num++;
+			result=divide(num,2);
+			if(result==1||result==3||result==5) {
+				count++;
+			}else {
+				result=divide(result,3);
+				if(result==1||result==3||result==5) {
+					count++;
+				}else{
+					result=divide(result,5);
+					if(result==1) {
+						count++;
+					}
+				}
+			}
+		}
+		return num;
+	}
+
+	public static int divide(int num, int n) {
+		int result=0;
+		int m=num%n;
+		if(m!=0) {
+			return num;
+		}else {
+			num=num/n;
+			result=divide(num,n);
+			return result;
+		}
+	}
+
+}
+
+
+#方法二：
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class GetUglyNumber_Solution {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		int N=scan.nextInt();
+		int num=Statistic(N);
+		System.out.println(num);
+	}
+
+	public static int Statistic(int index) {
+		ArrayList<Integer> num=new ArrayList<Integer>();
+		num.add(1);
+		if(index<7) {
+			return index;
+		}
+		int t2=0;
+		int t3=0;
+		int t5=0;
+		for(int i=1;i<index;i++) {
+			num.add(Math.min(num.get(t2)*2, Math.min(num.get(t3)*3, num.get(t5)*5)));
+			if(num.get(i)==num.get(t2)*2) {
+				t2++;
+			}
+			if(num.get(i)==num.get(t3)*3) {
+				t3++;
+			}
+			if(num.get(i)==num.get(t5)*5) {
+				t5++;
+			}
+		}
+		return num.get(num.size()-1);
+	}
+}
