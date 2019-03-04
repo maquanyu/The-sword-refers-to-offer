@@ -62,3 +62,67 @@ public class Solution {
 	}
 
 }
+
+
+#方法二：
+import java.util.ArrayList;
+
+public class Solution_1 {
+	
+	static ArrayList<String> result = new ArrayList<String>();
+	static StringBuilder tmp=new StringBuilder();
+	
+	public static void main(String[] args) {
+		String str="ab";
+		ArrayList<String> list = new ArrayList<String>();
+		list=Permutation(str);
+		for(int i=0;i<list.size();i++) {
+			System.out.print(list.get(i)+" ");
+		}
+	}
+
+	public static ArrayList<String> Permutation(String str) {
+		
+		char[][] data=new char[2][str.length()];
+		for(int i=0;i<str.length();i++) {
+			data[0][i]=str.charAt(i);
+			data[1][i]='0';
+		}
+		deepSearch(0,data);
+		dicSorted(result);
+		return result;
+	}
+
+	public static void dicSorted(ArrayList<String> result) {
+		for(int i=0;i<result.size()-1;i++) {
+			for(int j=i+1;j<result.size();j++) {
+				if(result.get(i).compareTo(result.get(j))==0) {
+					result.remove(j);
+				}else if(result.get(i).compareTo(result.get(j))>0) {
+					String tm=result.get(j);
+					result.add(i, tm);
+					result.remove(j+1);
+				}
+			}
+		}
+	}
+
+	public static void deepSearch(int n, char[][] data) {
+		if(n==data[0].length+1) {
+			result.add(tmp.toString());
+			
+			return;
+		}
+		for(int i=0;i<data[0].length;i++) {
+			if(data[1][i]=='0') {
+				tmp.append(data[0][i]);
+				data[1][i]='1';
+				deepSearch(tmp.length()+1,data);
+				tmp.deleteCharAt(tmp.length()-1);
+				data[1][i]='0';
+			}
+		}
+		return;
+	}
+
+}
