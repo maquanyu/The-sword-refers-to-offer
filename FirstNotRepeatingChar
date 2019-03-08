@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class FirstNotRepeatingChar {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		String str=new String();
+		str=scan.nextLine();
+		int result=FirstNotRepeating(str);
+		System.out.println(result);
+	}
+
+	public static int FirstNotRepeating(String str) {
+		char[] strToChar=str.toCharArray();
+		int index=-1;
+		for(int i=0;i<strToChar.length;i++) {
+			boolean flag=true;
+			for(int j=i+1;j<strToChar.length;j++) {
+				if(strToChar[i]==strToChar[j]) {
+					strToChar[j]='0';
+					flag=false;
+				}
+			}
+			if(flag&&strToChar[i]!='0') {
+				index=i;
+				break;
+			}
+		}
+		return index;
+	}
+
+}
