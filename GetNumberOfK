@@ -1,0 +1,20 @@
+public class Solution {
+
+	public static void main(String[] args) {
+		int[] array= {1,2,3,4,5,5,5,6,6,7,8};
+		int k=5;
+		int result=GetNumberofK(array,k);
+		System.out.println(result);
+	}
+
+	public static int GetNumberofK(int[] array, int k) {
+		int count=0;
+		for(int i=0;i<array.length;i++) {
+			if(k==array[i]) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+}
