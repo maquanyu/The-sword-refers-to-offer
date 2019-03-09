@@ -15,22 +15,23 @@ public class Solution {
 		}
 		for(int i=0;i<numbers.length-1;i++) {
 			int mix=i;
-			for(int j=mix+1;j<numbers.length;j++) {
+			for(int j=i+1;j<numbers.length;j++) {
 				if(newNum[i].length()>newNum[j].length()) {
 					newNum[j]=addStr(newNum[j],newNum[i].length());
 				}
 				if(newNum[i].length()<newNum[j].length()) {
 					newNum[i]=addStr(newNum[i],newNum[j].length());
 				}
-				if(numbers[mix]>numbers[j]) {
-					mix=j;
+				if(newNum[i].compareTo(newNum[j])>0) {
+					int temp=numbers[i];
+					numbers[i]=numbers[j];
+					numbers[j]=temp;
+					String tmp=new String();
+					tmp=newNum[i];
+					newNum[i]=newNum[j];
+					newNum[j]=tmp;
 				}
 				
-			}
-			if(i!=mix) {
-				int temp=numbers[i];
-				numbers[i]=numbers[mix];
-				numbers[mix]=temp;
 			}
 		}
 		for(int i=0;i<numbers.length;i++) {
