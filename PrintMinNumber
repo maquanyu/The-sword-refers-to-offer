@@ -14,7 +14,6 @@ public class Solution {
 			newNum[i]=Integer.toString(numbers[i]);
 		}
 		for(int i=0;i<numbers.length-1;i++) {
-			int mix=i;
 			for(int j=i+1;j<numbers.length;j++) {
 				if(newNum[i].length()>newNum[j].length()) {
 					newNum[j]=addStr(newNum[j],newNum[i].length());
@@ -31,7 +30,6 @@ public class Solution {
 					newNum[i]=newNum[j];
 					newNum[j]=tmp;
 				}
-				
 			}
 		}
 		for(int i=0;i<numbers.length;i++) {
