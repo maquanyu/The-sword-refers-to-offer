@@ -1,0 +1,48 @@
+public class Solution {
+	
+	public static void main(String[] args) {
+		int[] numbers = {3,32,321};
+		String str=new String();
+		str=PrintMinNumber(numbers);
+		System.out.println(str);
+	}
+
+	public static String PrintMinNumber(int[] numbers) {
+		String str=new String();
+		String[] newNum=new String[numbers.length];
+		for(int i=0;i<numbers.length;i++) {
+			newNum[i]=Integer.toString(numbers[i]);
+		}
+		for(int i=0;i<numbers.length-1;i++) {
+			int mix=i;
+			for(int j=mix+1;j<numbers.length;j++) {
+				if(newNum[i].length()>newNum[j].length()) {
+					newNum[j]=addStr(newNum[j],newNum[i].length());
+				}
+				if(newNum[i].length()<newNum[j].length()) {
+					newNum[i]=addStr(newNum[i],newNum[j].length());
+				}
+				if(numbers[mix]>numbers[j]) {
+					mix=j;
+				}
+				
+			}
+			if(i!=mix) {
+				int temp=numbers[i];
+				numbers[i]=numbers[mix];
+				numbers[mix]=temp;
+			}
+		}
+		for(int i=0;i<numbers.length;i++) {
+			str=str.concat(Integer.toString(numbers[i]));
+		}
+		return str;
+	}
+
+	public static String addStr(String str, int length) {
+		for(int i=1;i<length;i++) {
+			str=str.concat(str.substring(0, 1));
+		}
+		return str;
+	}
+}
