@@ -1,0 +1,57 @@
+#Enter a binary tree to determine if the binary tree is a balanced binary tree.
+
+
+
+public class Solution {
+
+	public static void main(String[] args) {
+		TreeNode tree1=new TreeNode(1);
+		TreeNode tree2=new TreeNode(2);
+		TreeNode tree3=new TreeNode(3);
+		TreeNode tree4=new TreeNode(4);
+		TreeNode tree5=new TreeNode(5);
+		TreeNode tree6=new TreeNode(6);
+		TreeNode tree7=new TreeNode(7);
+		
+		
+		tree1.left=tree2;
+		tree1.right=tree3;
+		tree2.right=tree5;
+		tree2.left=tree4;
+		tree3.right=tree6;
+		tree5.left=tree7;
+		
+		boolean flag=IsBalanced_Solution(tree1);
+		System.out.println(flag);
+	}
+
+	public static boolean IsBalanced_Solution(TreeNode root) {
+		boolean isBalanced=true;
+		if(root==null) {
+			return isBalanced;
+		}else {
+			int left=TreeDepth(root.left);
+			int right=TreeDepth(root.right);
+			if(Math.abs(left-right)>1) {
+				isBalanced=false;
+				return isBalanced;
+			}else{
+				boolean rootLeft=IsBalanced_Solution(root.left);
+				boolean rootRight=IsBalanced_Solution(root.right);
+				isBalanced=rootLeft&&rootRight;
+				return isBalanced;
+			}
+		}
+		
+	}
+
+	public static int TreeDepth(TreeNode root) {
+		if(root==null) {
+			return 0;
+		}else {
+			int i=TreeDepth(root.left);
+			int j=TreeDepth(root.right);
+			return i<j?j+1:i+1;
+		}
+	}
+}
