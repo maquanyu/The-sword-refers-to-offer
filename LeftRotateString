@@ -1,0 +1,23 @@
+public class Solution {
+
+	public static void main(String[] args) {
+		String str=new String();
+		str="abcXYZdef";
+		int n=3;
+		String result=new String();
+		result=LeftRotateString(str,n);
+		System.out.println(result);
+	}
+
+	private static String LeftRotateString(String str, int n) {
+		if(n>str.length()) {
+			return "";
+		}
+		String subStr=new String();
+		subStr=str.substring(0, n);
+		str=str.substring(n);
+		str=str.concat(subStr);
+		return str;
+	}
+
+}
