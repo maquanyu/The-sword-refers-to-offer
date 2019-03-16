@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+
+public class Solution {
+
+	public static void main(String[] args) {
+
+		ArrayList<ArrayList<Integer>> list=new ArrayList<ArrayList<Integer>>();
+		list=FindContinuousSequence(3);
+		System.out.println(list);
+	}
+
+	public static ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+		ArrayList<ArrayList<Integer>> list=new ArrayList<ArrayList<Integer>>();
+		if(sum<=2) {
+			return list;
+		}
+		ArrayList<Integer> num=new ArrayList<Integer>();
+		for(int i=1;i<=(sum/2+1);i++) {
+			num.add(i);
+		}
+		getSum(num,list,sum);
+		return list;
+	}
+
+	public static void getSum(ArrayList<Integer> num, ArrayList<ArrayList<Integer>> list, int sum) {
+		if(num.size()==1) {
+			return;
+		}
+		int count=0;
+		int index=0;
+		ArrayList<Integer> newNum=new ArrayList<Integer>();
+		for(int i=0;i<num.size();i++) {
+			if(count==sum) {
+				list.add(newNum);
+				break;
+			}else if(count>sum) {
+				break;
+			}
+			count+=num.get(i);
+			newNum.add(num.get(i));
+			index=i;
+		}
+		if(count==sum&&index==num.size()-1) {
+			list.add(newNum);
+			return;
+		}
+		num.remove(0);
+		getSum(num,list,sum);
+	}
+
+}
