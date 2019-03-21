@@ -1,0 +1,36 @@
+public class StrToInt {
+
+	public static void main(String[] args) {
+		String str=new String();
+		str="+123";
+//		int result=Integer.valueOf(str);
+		int result=strToInt(str);
+		System.out.println(result);
+	}
+
+	private static int strToInt(String str) {
+		boolean nu1= str.matches("^((-\\d+)|(\\+\\d+)|(\\d+))$");
+		if(str=="0"||!nu1) {
+			return 0;
+		}
+		int sum=0;
+		int count=1;
+		char[] newChar=str.toCharArray();
+		for(int i=newChar.length-1;i>=1;i--) {
+			int num=newChar[i]-'0';
+			sum+=num*count;
+			count*=10;
+		}
+		if(newChar[0]=='+') {
+			return sum;
+		}else if(newChar[0]=='-') {
+			return -sum;
+		}else {
+			int n=newChar[0]-'0';
+			sum+=count*n;
+			return sum;
+		}
+		
+	}
+
+}
