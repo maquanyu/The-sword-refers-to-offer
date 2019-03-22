@@ -1,0 +1,27 @@
+package multiply;
+
+import java.util.Arrays;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		int[] A= {1,2,3,4,5,6};
+		int[] B=multiply(A);
+		System.out.println(Arrays.toString(B));
+	}
+
+	private static int[] multiply(int[] A) {
+		int[] B=new int[A.length];
+		for(int i=0;i<B.length;i++) {
+			int mul=1;
+			for(int j=0;j<A.length;j++) {
+				if(i!=j) {
+					mul*=A[j];
+				}
+			}
+			B[i]=mul;
+		}
+		return B;
+	}
+
+}
